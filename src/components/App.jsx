@@ -17,9 +17,14 @@ class App extends Component {
   };
 
   processSubmit = data => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, data],
-    }));
+    let [check] = this.state.contacts.filter(el => el.name === data.name);
+    if (check) {
+      alert(`${check.name} is already in your contacts`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, data],
+      }));
+    }
   };
 
   setFilter = e => {
@@ -38,8 +43,6 @@ class App extends Component {
   };
 
   render() {
-    // const { contacts } = this.state;
-
     const filteredList = this.getFilteredList();
 
     return (
@@ -50,7 +53,6 @@ class App extends Component {
           list={filteredList}
           onDeleteContact={this.deleteContact}
         />
-        {/* <ContactsList list={this.handleFilter} /> */}
       </>
     );
   }

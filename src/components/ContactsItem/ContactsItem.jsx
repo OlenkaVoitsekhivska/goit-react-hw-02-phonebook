@@ -1,11 +1,21 @@
-function ContactsItem({ id, name, number, onDeleteContact }) {
+import style from './ContactsItem.module.css';
+import PropTypes from 'prop-types';
+
+function ContactsItem({ name, number, onDeleteContact }) {
   return (
-    <li>
-      {name}
-      <p>{number}</p>
-      <button onClick={onDeleteContact}>delete</button>
+    <li className={style.contactItem}>
+      <p className={style.contName}>{name}</p>
+      <p className={style.contNumber}>{number}</p>
+      <button onClick={onDeleteContact} className={style.contBtn}>
+        delete
+      </button>
     </li>
   );
 }
+ContactsItem.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.string,
+  onDeleteContact: PropTypes.func,
+};
 
 export default ContactsItem;
