@@ -4,6 +4,7 @@ import ContactsList from './ContactsList/ContactsList';
 
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
+import PropTypes from 'prop-types';
 
 class App extends Component {
   state = {
@@ -59,5 +60,13 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.isRequired,
+  }),
+};
 
 export default App;
