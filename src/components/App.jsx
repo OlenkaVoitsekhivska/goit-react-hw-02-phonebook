@@ -17,9 +17,11 @@ class App extends Component {
   };
 
   processSubmit = data => {
-    let [check] = this.state.contacts.filter(el => el.name === data.name);
+    let [check] = this.state.contacts.filter(
+      el => el.name.toLowerCase() === data.name.toLowerCase()
+    );
     if (check) {
-      alert(`${check.name} is already in your contacts`);
+      alert(`${data.name} is already in your contacts`);
     } else {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, data],
@@ -48,7 +50,7 @@ class App extends Component {
     return (
       <>
         <Form onSubmit={this.processSubmit} />
-        <Filter onChange={this.setFilter} />
+        <Filter onChange={this.setFilter} filter={this.state.filter} />
         <ContactsList
           list={filteredList}
           onDeleteContact={this.deleteContact}

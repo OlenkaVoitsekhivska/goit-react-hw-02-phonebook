@@ -4,29 +4,23 @@ import style from './Form.module.css';
 
 class Form extends Component {
   state = {
-    id: '',
     name: '',
     number: '',
   };
 
   handleInputChange = e => {
-    this.loginInputId = nanoid();
-
     this.setState({
-      id: this.loginInputId,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    this.props.onSubmit({ ...this.state, id: nanoid() });
 
-    setTimeout(() => {
-      e.target.elements.name.value = '';
-      e.target.elements.number.value = '';
-    }, 2000);
+    this.setState({ name: '', number: '' });
   };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -36,6 +30,7 @@ class Form extends Component {
           <input
             className={style.nameInput}
             onChange={this.handleInputChange}
+            value={this.state.name}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -48,6 +43,7 @@ class Form extends Component {
           <input
             className={style.numberInput}
             onChange={this.handleInputChange}
+            value={this.state.number}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -62,5 +58,7 @@ class Form extends Component {
     );
   }
 }
+
+
 
 export default Form;
