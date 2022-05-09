@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import style from './Form.module.css';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
   state = {
@@ -59,6 +60,12 @@ class Form extends Component {
   }
 }
 
-
+Form.propTypes = {
+  props: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+};
 
 export default Form;
